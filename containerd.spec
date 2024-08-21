@@ -1,15 +1,15 @@
 Summary:	An open and reliable container runtime
 Name:		containerd
-Version:	1.6.0
-Release:	2
+Version:	1.7.20
+Release:	1
 License:	Apache v2.0
 Group:		Applications
 Source0:	https://github.com/containerd/containerd/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	aa0371db45d4e149e65ccbbddcbed8b1
+# Source0-md5:	e3c87f6c2eb43d6531ae6219c6263f79
 Patch0:		systemd.patch
 URL:		https://containerd.io/
 BuildRequires:	btrfs-progs-devel
-BuildRequires:	golang >= 1.16
+BuildRequires:	golang >= 1.21
 BuildRequires:	rpmbuild(macros) >= 2.009
 Requires:	runc
 ExclusiveArch:	%go_arches
@@ -31,7 +31,6 @@ etc.
 
 %build
 %{__make} binaries \
-	GO="%__go" \
 	VERSION="%{version}"
 
 %install
