@@ -11,7 +11,7 @@ URL:		https://containerd.io/
 BuildRequires:	btrfs-progs-devel
 BuildRequires:	golang >= 1.21
 BuildRequires:	rpmbuild(macros) >= 2.009
-Requires:	runc
+Requires:	runc >= 1.1.13
 ExclusiveArch:	%go_arches
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
