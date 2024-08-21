@@ -1,0 +1,11 @@
+--- containerd-1.6.0/containerd.service.orig	2024-08-21 10:56:47.520768807 +0200
++++ containerd-1.6.0/containerd.service	2024-08-21 18:44:14.468072341 +0200
+@@ -19,7 +19,7 @@
+ 
+ [Service]
+ ExecStartPre=-/sbin/modprobe overlay
+-ExecStart=/usr/local/bin/containerd
++ExecStart=/usr/bin/containerd
+ 
+ Type=notify
+ Delegate=yes

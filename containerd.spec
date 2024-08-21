@@ -1,11 +1,12 @@
 Summary:	An open and reliable container runtime
 Name:		containerd
 Version:	1.6.0
-Release:	1
+Release:	2
 License:	Apache v2.0
 Group:		Applications
 Source0:	https://github.com/containerd/containerd/archive/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	aa0371db45d4e149e65ccbbddcbed8b1
+Patch0:		systemd.patch
 URL:		https://containerd.io/
 BuildRequires:	btrfs-progs-devel
 BuildRequires:	golang >= 1.16
@@ -26,6 +27,7 @@ etc.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__make} binaries \
@@ -35,12 +37,28 @@ etc.
 %install
 rm -rf $RPM_BUILD_ROOT
 
+install -d $RPM_BUILD_ROOT%{systemdunitdir}
+
 %{__make} install \
 	DESTDIR="$RPM_BUILD_ROOT" \
 	PREFIX="%{_prefix}"
 
+cp -p containerd.service $RPM_BUILD_ROOT%{systemdunitdir}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+%systemd_post containerd.service
+
+%preun
+%systemd_preun containerd.service
+
+%postun
+%systemd_reload
+
+%triggerpostun -- %{name} < 1.6.0-2
+%systemd_trigger containerd.service
 
 %files
 %defattr(644,root,root,755)
@@ -51,3 +69,4 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/containerd-shim-runc-v2
 %attr(755,root,root) %{_bindir}/containerd-stress
 %attr(755,root,root) %{_bindir}/ctr
+%{systemdunitdir}/containerd.service
