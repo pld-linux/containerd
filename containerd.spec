@@ -8,8 +8,8 @@ Source0:	https://github.com/containerd/containerd/archive/v%{version}/%{name}-%{
 # Source0-md5:	e3c87f6c2eb43d6531ae6219c6263f79
 Patch0:		systemd.patch
 URL:		https://containerd.io/
-BuildRequires:	btrfs-progs-devel
 BuildRequires:	golang >= 1.21
+BuildRequires:	linux-libc-headers >= 7:4.12
 BuildRequires:	rpmbuild(macros) >= 2.009
 Requires:	runc >= 1.1.13
 ExclusiveArch:	%go_arches
