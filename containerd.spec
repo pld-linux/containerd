@@ -1,11 +1,11 @@
 Summary:	An open and reliable container runtime
 Name:		containerd
-Version:	1.7.24
+Version:	1.7.30
 Release:	1
 License:	Apache v2.0
 Group:		Applications
 Source0:	https://github.com/containerd/containerd/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	c7df2f3f6100256f5ee2304ce298cb66
+# Source0-md5:	dfc8eb0c521a8fd418509d908e847846
 Patch0:		systemd.patch
 URL:		https://containerd.io/
 BuildRequires:	golang >= 1.21
@@ -15,7 +15,7 @@ Requires:	runc >= 1.1.13
 ExclusiveArch:	%go_arches
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_debugsource_packages	0
+%undefine		_debugsource_packages
 
 %description
 containerd is an industry-standard container runtime with an emphasis
